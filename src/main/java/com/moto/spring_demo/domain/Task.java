@@ -1,5 +1,6 @@
 package com.moto.spring_demo.domain;
 
+import com.fasterxml.jackson.annotation.JsonIgnore;
 import org.hibernate.validator.constraints.NotBlank;
 
 import javax.persistence.Entity;
@@ -21,6 +22,7 @@ public class Task extends BaseEntity{
     private String priority;
 
     @ManyToOne
+    @JsonIgnore
     private User user;
 
     public String getName() {

@@ -16,6 +16,7 @@ import java.util.Map;
  */
 
 @RestController
+@RequestMapping("/api/v1")
 public class TaskController {
 
     @Autowired
@@ -39,7 +40,7 @@ public class TaskController {
         return new ResponseEntity<>(task, HttpStatus.CREATED);
     }
 
-    @GetMapping("/task/all")
+    @GetMapping("/templates/company/templates.task/all")
     public List<Task> getAllTask() {
 
         return taskRepository.findAll();

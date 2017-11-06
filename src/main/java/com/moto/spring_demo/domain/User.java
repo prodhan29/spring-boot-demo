@@ -44,4 +44,12 @@ public class User extends BaseEntity {
     public void setUsername(String username) {
         this.username = username;
     }
+
+    @Override
+    public String toString() {
+        return "User{" +
+                "name='" + name + '\'' +
+                ", username='" + username +
+                '}';
+    }
 }
