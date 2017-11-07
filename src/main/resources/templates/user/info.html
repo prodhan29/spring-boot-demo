@@ -1,0 +1,23 @@
+<!DOCTYPE html>
+<html xmlns:th="http://www.thymeleaf.org"
+      xmlns:layout="http://www.ultraq.net.nz/thymeleaf/layout"
+      xmlns="http://www.w3.org/1999/xhtml"
+      layout:decorator="layouts/base_layout">
+
+<div layout:fragment="content">
+
+    <section class="card">
+        hello all users
+    </section>
+
+    <section>
+        <div class="card-block">
+            <div class="tbl-row">
+                <h4 style="padding-left: 20px;padding-top: 20px;" th:text="${user?.Name}">User name</h4>
+            </div>
+        </div>
+    </section>
+
+</div>
+
+</html>

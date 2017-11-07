@@ -40,7 +40,7 @@ public class TaskController {
         return new ResponseEntity<>(task, HttpStatus.CREATED);
     }
 
-    @GetMapping("/templates/company/templates.task/all")
+    @GetMapping("/task/all")
     public List<Task> getAllTask() {
 
         return taskRepository.findAll();

@@ -1,0 +1,50 @@
+<!DOCTYPE html>
+<html xmlns:th="http://www.thymeleaf.org"
+      xmlns:layout="http://www.ultraq.net.nz/thymeleaf/layout"
+      xmlns="http://www.w3.org/1999/xhtml"
+      layout:decorator="layouts/base_layout">
+
+<div layout:fragment="content">
+
+    <section class="card">
+        <h2>All Users</h2>
+    </section>
+
+    <section>
+        <div class="card-block">
+            <table class="table">
+                <tr>
+                    <th>ID</th>
+                    <th>Name</th>
+                    <th>Username</th>
+                    <th></th>
+                    <th></th>
+                    <th></th>
+                </tr>
+                <tr th:each="user: ${allUsers}">
+                    <td th:text="${user?.id}"></td>
+                    <td th:text="${user?.name}"></td>
+                    <td th:text="${user?.username}"></td>
+                    <td>
+                        <a class="btn btn-info" th:href="@{/user/}+ ${user?.id} +@{/info}">
+                            show
+                        </a>
+                    </td>
+                    <td>
+                        <a class="btn btn-default" th:href="@{/user/}+ ${user?.id} +@{/edit}">
+                            edit
+                        </a>
+                    </td>
+                    <td>
+                        <a class="btn btn-danger" th:method="delete" th:href="@{/user/}+ ${user?.id} +@{/delete}">
+                            delete
+                        </a>
+                    </td>
+                </tr>
+            </table>
+        </div>
+    </section>
+
+</div>
+
+</html>

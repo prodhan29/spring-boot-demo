@@ -1,0 +1,344 @@
+<nav class="side-menu side-menu-big-icon">
+    <div class="side-menu-avatar">
+        <div class="avatar-preview avatar-preview-100">
+            <div th:if="${!currentUser?.hasAssignedRole('ROLE_COMPANY_ADMIN')}">
+                <img th:if="${currentUser?.cmedPerson?.profilePicture != null}" th:src="@{/user/images/}+${currentUser.cmedPerson.id}" src="/img/avatar-1-256.png" alt="">
+                <img th:if="${currentUser?.cmedPerson?.profilePicture == null}" src="/img/avatar-1-256.png" alt="">
+            </div>
+            <div th:if="${currentUser?.hasAssignedRole('ROLE_COMPANY_ADMIN')}">
+                <img th:if="${currentUser?.company?.logo != null}" th:src="@{/user/images/}+${currentUser.cmedPerson.id}" src="/img/avatar-1-256.png" alt="">
+                <img th:if="${currentUser?.company?.logo == null}" src="/img/avatar-1-256.png" alt="">
+            </div>
+        </div>
+    </div>
+    <ul sec:authorize="hasRole('ROLE_USER')" class="side-menu-list">
+        <li class="brown">
+            <a th:href="@{/user/}+${currentUser.cmedPerson.id}+@{/dashboard}">
+                <i class="fa fa-tachometer"></i>
+                <span class="lbl">Dashboard</span>
+            </a>
+        </li>
+        <li class="green">
+            <a th:href="@{/user/}+${currentUser.cmedPerson.id}+@{/profile}">
+                <i class="font-icon font-icon-user"></i>
+                <span class="lbl">Profile</span>
+            </a>
+        </li>
+        <li class="purple with-sub">
+	            <span>
+	                <i class="font-icon font-icon-chart-2"></i>
+	                <span class="lbl">Measurement Data</span>
+	            </span>
+            <ul>
+                <li><a th:href="@{/user/}+${currentUser.cmedPerson.id}+@{/measurements}"><span
+                        class="lbl">All Measurement Data</span></a></li>
+                <li><a th:href="@{/user/}+${currentUser.cmedPerson.id}+@{/measurements/BP}"><span class="lbl">Blood Pressure Data</span></a>
+                </li>
+                <li><a th:href="@{/user/}+${currentUser.cmedPerson.id}+@{/measurements/BLOOD_SUGAR}"><span
+                        class="lbl">Blood Sugar Data</span></a></li>
+                <li><a th:href="@{/user/}+${currentUser.cmedPerson.id}+@{/measurements/PULSE_RATE}"><span
+                        class="lbl">Pulse Rate Data</span></a></li>
+                <li><a th:href="@{/user/}+${currentUser.cmedPerson.id}+@{/measurements/SpO2}"><span class="lbl">SpO2 Data</span></a></li>
+                <li><a th:href="@{/user/}+${currentUser.cmedPerson.id}+@{/measurements/BMI}"><span class="lbl">BMI Data</span></a></li>
+                <li><a th:href="@{/user/}+${currentUser.cmedPerson.id}+@{/measurements/EAR_TEMP}"><span
+                        class="lbl">Temperature Data</span></a></li>
+                <li><a th:href="@{/user/}+${currentUser.cmedPerson.id}+@{/measurements/BMI?attr=HEIGHT}"><span
+                        class="lbl">Height</span></a></li>
+                <li><a th:href="@{/user/}+${currentUser.cmedPerson.id}+@{/measurements/BMI?attr=WEIGHT}"><span
+                        class="lbl">Weight</span></a></li>
+            </ul>
+        </li>
+
+        <li class="aquamarine">
+            <a th:href="@{/feedback}">
+                <i class="fa fa-commenting"></i>
+                <span class="lbl">Feedback</span>
+            </a>
+        </li>
+
+        <li class="red">
+            <a th:href="@{/logout}" class="label-right">
+                <i class="font-icon glyphicon glyphicon-log-out"></i>
+                <span class="lbl">Logout</span>
+            </a>
+        </li>
+    </ul>
+    <ul sec:authorize="hasRole('ROLE_OPERATIONS')"  class="side-menu-list">
+        <!--<li class="purple">-->
+        <!--<a th:href="@{/ops/dashboard}">-->
+        <!--<i class="fa fa-tachometer"></i>-->
+        <!--<span class="lbl">Dashboard</span>-->
+        <!--</a>-->
+        <!--</li>-->
+        <li class="brown">
+            <a th:href="@{/ops/companies}">
+                <i class="fa fa-briefcase"></i>
+                <span class="lbl">Companies</span>
+            </a>
+        </li>
+        <li class="blue-darker">
+            <a th:href="@{/ops/users}">
+                <i class="fa fa-users"></i>
+                <span class="lbl">Users</span>
+            </a>
+        </li>
+        <li class="aquamarine">
+            <a th:href="@{/feedback}">
+                <i class="fa fa-commenting"></i>
+                <span class="lbl">Feedback</span>
+            </a>
+        </li>
+        <li class="red">
+            <a th:href="@{/logout}" class="label-right">
+                <i class="font-icon glyphicon glyphicon-log-out"></i>
+                <span class="lbl">Logout</span>
+            </a>
+        </li>
+        <!--	        <li class="dark-violet">
+                        <a href="#">
+                            <i class="font-icon font-icon-cogwheel"></i>
+                            <span class="lbl">Settings</span>
+                        </a>
+                    </li>-->
+        <!--<li class="aquamarine">-->
+        <!--<a th:href="@{/ops}">-->
+        <!--<i class="fa fa-commenting"></i>-->
+        <!--<span class="lbl">Note</span>-->
+        <!--</a>-->
+        <!--</li>-->
+        <!--	        <li class="blue">
+                        <a href="#">
+                            <i class="fa fa-briefcase"></i>
+                            <span class="lbl">Services</span>
+                        </a>
+                    </li>-->
+
+    </ul>
+    <ul sec:authorize="hasRole('ROLE_COMPANY_ADMIN')" class="side-menu-list">
+        <li class="purple">
+            <a th:href="@{/corp/}+${currentUser.company.code}">
+                <i class="fa fa-tachometer"></i>
+                <span class="lbl">Dashboard</span>
+            </a>
+        </li>
+        <li class="coral with-sub">
+				 <span>
+	                <i class="font-icon font-icon-chart"></i>
+	                <span class="lbl">Measurement Reports</span>
+	            </span>
+            <ul>
+                <li><a th:href="@{/corp/}+${currentUser.company.code}+@{/measurements}"><span class="lbl">All Data</span></a></li>
+                <li><a th:href="@{/corp/}+${currentUser.company.code}+@{/measurements/BP}"><span class="lbl">Blood Pressure</span></a></li>
+                <li><a th:href="@{/corp/}+${currentUser.company.code}+@{/measurements/BLOOD_SUGAR}"><span class="lbl">Blood Sugar</span></a></li>
+                <li><a th:href="@{/corp/}+${currentUser.company.code}+@{/measurements/PULSE_RATE}"><span class="lbl">Pulse Rate</span></a></li>
+                <li><a th:href="@{/corp/}+${currentUser.company.code}+@{/measurements/SpO2}"><span class="lbl">SPO2</span></a></li>
+                <li><a th:href="@{/corp/}+${currentUser.company.code}+@{/measurements/BMI}"><span class="lbl">BMI</span></a></li>
+                <li><a th:href="@{/corp/}+${currentUser.company.code}+@{/measurements/EAR_TEMP}"><span class="lbl">Ear Temperature</span></a></li>
+                <li><a th:href="@{/corp/}+${currentUser.company.code}+@{/measurements/BMI?attr=HEIGHT}"><span class="lbl">Height</span></a></li>
+                <li><a th:href="@{/corp/}+${currentUser.company.code}+@{/measurements/BMI?attr=WEIGHT}"><span class="lbl">Weight</span></a></li>
+            </ul>
+        </li>
+        <li class="blue-darker">
+            <a th:href="@{/corp/}+${currentUser.company.code}+@{/users}">
+                <i class="fa fa-users"></i>
+                <span class="lbl">Members</span>
+            </a>
+        </li>
+        <!--	        <li class="dark-violet">
+                        <a href="#">
+                            <i class="font-icon font-icon-cogwheel"></i>
+                            <span class="lbl">Settings</span>
+                        </a>
+                    </li>-->
+        <li class="aquamarine">
+            <a th:href="@{/feedback}">
+                <i class="fa fa-commenting"></i>
+                <span class="lbl">Feedback</span>
+            </a>
+        </li>
+        <!--	        <li class="blue">
+                        <a href="#">
+                            <i class="fa fa-briefcase"></i>
+                            <span class="lbl">Services</span>
+                        </a>
+                    </li>-->
+
+    </ul>
+</nav><!--.side-menu-->
+
+<!--<nav class="side-menu" sec:authorize="hasRole('ROLE_USER')">-->
+    <!--<div class="side-menu-avatar">-->
+        <!--<div class="avatar-preview avatar-preview-100">-->
+            <!--<img th:src="@{/user/images/}+${currentUser.cmedPerson.id}" src="/img/avatar-1-256.png" alt="">-->
+        <!--</div>-->
+    <!--</div>-->
+    <!--<ul class="side-menu-list">-->
+        <!--<li class="brown">-->
+            <!--<a th:href="@{/user/}+${currentUser.cmedPerson.id}+@{/dashboard}">-->
+                <!--<i class="fa fa-tachometer"></i>-->
+                <!--<span class="lbl">Dashboard</span>-->
+            <!--</a>-->
+        <!--</li>-->
+        <!--<li class="green">-->
+            <!--<a th:href="@{/user/}+${currentUser.cmedPerson.id}+@{/profile}">-->
+                <!--<i class="font-icon font-icon-user"></i>-->
+                <!--<span class="lbl">Profile</span>-->
+            <!--</a>-->
+        <!--</li>-->
+        <!--<li class="purple with-sub">-->
+	            <!--<span>-->
+	                <!--<i class="font-icon font-icon-chart-2"></i>-->
+	                <!--<span class="lbl">Measurement Data</span>-->
+	            <!--</span>-->
+            <!--<ul>-->
+                <!--<li><a th:href="@{/user/}+${currentUser.cmedPerson.id}+@{/measurements}"><span-->
+                        <!--class="lbl">All Measurement Data</span></a></li>-->
+                <!--<li><a th:href="@{/user/}+${currentUser.cmedPerson.id}+@{/measurements/BP}"><span class="lbl">Blood Pressure Data</span></a>-->
+                <!--</li>-->
+                <!--<li><a th:href="@{/user/}+${currentUser.cmedPerson.id}+@{/measurements/BLOOD_SUGAR}"><span-->
+                        <!--class="lbl">Blood Sugar Data</span></a></li>-->
+                <!--<li><a th:href="@{/user/}+${currentUser.cmedPerson.id}+@{/measurements/PULSE_RATE}"><span-->
+                        <!--class="lbl">Pulse Rate Data</span></a></li>-->
+                <!--<li><a th:href="@{/user/}+${currentUser.cmedPerson.id}+@{/measurements/SpO2}"><span class="lbl">SpO2 Data</span></a></li>-->
+                <!--<li><a th:href="@{/user/}+${currentUser.cmedPerson.id}+@{/measurements/BMI}"><span class="lbl">BMI Data</span></a></li>-->
+                <!--<li><a th:href="@{/user/}+${currentUser.cmedPerson.id}+@{/measurements/EAR_TEMP}"><span-->
+                        <!--class="lbl">Temperature Data</span></a></li>-->
+                <!--<li><a th:href="@{/user/}+${currentUser.cmedPerson.id}+@{/measurements/BMI?attr=HEIGHT}"><span-->
+                        <!--class="lbl">Height</span></a></li>-->
+                <!--<li><a th:href="@{/user/}+${currentUser.cmedPerson.id}+@{/measurements/BMI?attr=WEIGHT}"><span-->
+                        <!--class="lbl">Weight</span></a></li>-->
+            <!--</ul>-->
+        <!--</li>-->
+
+        <!--<li class="aquamarine">-->
+            <!--<a th:href="@{/feedback}">-->
+                <!--<i class="fa fa-commenting"></i>-->
+                <!--<span class="lbl">Feedback</span>-->
+            <!--</a>-->
+        <!--</li>-->
+
+        <!--<li class="red">-->
+            <!--<a th:href="@{/logout}" class="label-right">-->
+                <!--<i class="font-icon glyphicon glyphicon-log-out"></i>-->
+                <!--<span class="lbl">Logout</span>-->
+            <!--</a>-->
+        <!--</li>-->
+    <!--</ul>-->
+<!--</nav>&lt;!&ndash;.side-menu&ndash;&gt;-->
+
+<!--<nav class="side-menu side-menu-big-icon" sec:authorize="hasRole('ROLE_OPERATIONS')">-->
+    <!--<div class="side-menu-avatar">-->
+        <!--<div class="avatar-preview avatar-preview-100">-->
+            <!--<img th:src="@{/user/images/}+${currentUser.cmedPerson.id}" src="/img/avatar-1-256.png" alt="">-->
+        <!--</div>-->
+    <!--</div>-->
+    <!--<ul  class="side-menu-list">-->
+        <!--&lt;!&ndash;<li class="purple">&ndash;&gt;-->
+        <!--&lt;!&ndash;<a th:href="@{/ops/dashboard}">&ndash;&gt;-->
+        <!--&lt;!&ndash;<i class="fa fa-tachometer"></i>&ndash;&gt;-->
+        <!--&lt;!&ndash;<span class="lbl">Dashboard</span>&ndash;&gt;-->
+        <!--&lt;!&ndash;</a>&ndash;&gt;-->
+        <!--&lt;!&ndash;</li>&ndash;&gt;-->
+        <!--<li class="brown">-->
+            <!--<a th:href="@{/ops/companies}">-->
+                <!--<i class="fa fa-briefcase"></i>-->
+                <!--<span class="lbl">Companies</span>-->
+            <!--</a>-->
+        <!--</li>-->
+        <!--<li class="blue-darker">-->
+            <!--<a th:href="@{/ops/users}">-->
+                <!--<i class="fa fa-users"></i>-->
+                <!--<span class="lbl">Users</span>-->
+            <!--</a>-->
+        <!--</li>-->
+        <!--<li class="aquamarine">-->
+            <!--<a th:href="@{/feedback}">-->
+                <!--<i class="fa fa-commenting"></i>-->
+                <!--<span class="lbl">Feedback</span>-->
+            <!--</a>-->
+        <!--</li>-->
+        <!--<li class="red">-->
+            <!--<a th:href="@{/logout}" class="label-right">-->
+                <!--<i class="font-icon glyphicon glyphicon-log-out"></i>-->
+                <!--<span class="lbl">Logout</span>-->
+            <!--</a>-->
+        <!--</li>-->
+        <!--&lt;!&ndash;	        <li class="dark-violet">-->
+                        <!--<a href="#">-->
+                            <!--<i class="font-icon font-icon-cogwheel"></i>-->
+                            <!--<span class="lbl">Settings</span>-->
+                        <!--</a>-->
+                    <!--</li>&ndash;&gt;-->
+        <!--&lt;!&ndash;<li class="aquamarine">&ndash;&gt;-->
+        <!--&lt;!&ndash;<a th:href="@{/ops}">&ndash;&gt;-->
+        <!--&lt;!&ndash;<i class="fa fa-commenting"></i>&ndash;&gt;-->
+        <!--&lt;!&ndash;<span class="lbl">Note</span>&ndash;&gt;-->
+        <!--&lt;!&ndash;</a>&ndash;&gt;-->
+        <!--&lt;!&ndash;</li>&ndash;&gt;-->
+        <!--&lt;!&ndash;	        <li class="blue">-->
+                        <!--<a href="#">-->
+                            <!--<i class="fa fa-briefcase"></i>-->
+                            <!--<span class="lbl">Services</span>-->
+                        <!--</a>-->
+                    <!--</li>&ndash;&gt;-->
+
+    <!--</ul>-->
+<!--</nav>&lt;!&ndash;.side-menu&ndash;&gt;-->
+
+<!--<nav class="side-menu side-menu-big-icon" sec:authorize="hasRole('ROLE_COMPANY_ADMIN')">-->
+    <!--<div class="side-menu-avatar">-->
+        <!--<div class="avatar-preview avatar-preview-100">-->
+            <!--<img th:src="@{/user/images/}+${currentUser.cmedPerson.id}" src="/img/avatar-1-256.png" alt="">-->
+        <!--</div>-->
+    <!--</div>-->
+    <!--<ul class="side-menu-list">-->
+        <!--<li class="purple">-->
+            <!--<a th:href="@{/corp/}+${currentUser.company.code}">-->
+                <!--<i class="fa fa-tachometer"></i>-->
+                <!--<span class="lbl">Dashboard</span>-->
+            <!--</a>-->
+        <!--</li>-->
+        <!--<li class="coral with-sub">-->
+				 <!--<span>-->
+	                <!--<i class="font-icon font-icon-chart"></i>-->
+	                <!--<span class="lbl">Measurement Reports</span>-->
+	            <!--</span>-->
+            <!--<ul>-->
+                <!--<li><a th:href="@{/corp/}+${currentUser.company.code}+@{/measurements}"><span class="lbl">All Data</span></a></li>-->
+                <!--<li><a th:href="@{/corp/}+${currentUser.company.code}+@{/measurements/BP}"><span class="lbl">Blood Pressure</span></a></li>-->
+                <!--<li><a th:href="@{/corp/}+${currentUser.company.code}+@{/measurements/BLOOD_SUGAR}"><span class="lbl">Blood Sugar</span></a></li>-->
+                <!--<li><a th:href="@{/corp/}+${currentUser.company.code}+@{/measurements/PULSE_RATE}"><span class="lbl">Pulse Rate</span></a></li>-->
+                <!--<li><a th:href="@{/corp/}+${currentUser.company.code}+@{/measurements/SpO2}"><span class="lbl">SPO2</span></a></li>-->
+                <!--<li><a th:href="@{/corp/}+${currentUser.company.code}+@{/measurements/BMI}"><span class="lbl">BMI</span></a></li>-->
+                <!--<li><a th:href="@{/corp/}+${currentUser.company.code}+@{/measurements/EAR_TEMP}"><span class="lbl">Ear Temperature</span></a></li>-->
+                <!--<li><a th:href="@{/corp/}+${currentUser.company.code}+@{/measurements/BMI?attr=HEIGHT}"><span class="lbl">Height</span></a></li>-->
+                <!--<li><a th:href="@{/corp/}+${currentUser.company.code}+@{/measurements/BMI?attr=WEIGHT}"><span class="lbl">Weight</span></a></li>-->
+            <!--</ul>-->
+        <!--</li>-->
+        <!--<li class="blue-darker">-->
+            <!--<a th:href="@{/corp/}+${currentUser.company.code}+@{/users}">-->
+                <!--<i class="fa fa-users"></i>-->
+                <!--<span class="lbl">Members</span>-->
+            <!--</a>-->
+        <!--</li>-->
+        <!--&lt;!&ndash;	        <li class="dark-violet">-->
+                        <!--<a href="#">-->
+                            <!--<i class="font-icon font-icon-cogwheel"></i>-->
+                            <!--<span class="lbl">Settings</span>-->
+                        <!--</a>-->
+                    <!--</li>&ndash;&gt;-->
+        <!--<li class="aquamarine">-->
+            <!--<a th:href="@{/feedback}">-->
+                <!--<i class="fa fa-commenting"></i>-->
+                <!--<span class="lbl">Feedback</span>-->
+            <!--</a>-->
+        <!--</li>-->
+        <!--&lt;!&ndash;	        <li class="blue">-->
+                        <!--<a href="#">-->
+                            <!--<i class="fa fa-briefcase"></i>-->
+                            <!--<span class="lbl">Services</span>-->
+                        <!--</a>-->
+                    <!--</li>&ndash;&gt;-->
+
+    <!--</ul>-->
+<!--</nav>&lt;!&ndash;.side-menu&ndash;&gt;-->

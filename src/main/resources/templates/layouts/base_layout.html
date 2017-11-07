@@ -1,0 +1,67 @@
+<!DOCTYPE html>
+
+<html xmlns="http://www.w3.org/1999/xhtml"
+      xmlns:layout="http://www.ultraq.net.nz/thymeleaf/layout"
+      xmlns:th="http://www.thymeleaf.org">
+
+    <head>
+        <meta charset="UTF-8" />
+        <meta name="viewport" content="width=device-width, initial-scale=1, user-scalable=no" />
+        <meta http-equiv="x-ua-compatible" content="ie=edge" />
+        <title layout:fragment="browser_title">Spring demo</title>
+
+        <div th:include="layouts/fragments/head_img"></div>
+        <div th:include="layouts/fragments/head_js"></div>
+        <div th:include="layouts/fragments/head_css"></div>
+
+
+        <div layout:fragment="header_include">
+
+        </div>
+        <div layout:fragment="header_js_include">
+
+        </div>
+
+        <div layout:fragment="header_css_include">
+
+        </div>
+    </head>
+
+
+    <body>
+
+    <!--TOP HEADER SECTION CONTAINS TOP MENU AND LEFT NAV MENU-->
+    <div th:include="layouts/fragments/header"></div>
+
+    <!--MAIN CONTENT FRAGMENT THAT WILL BE RENDERED FROM CONTROLLERS-->
+    <div layout:fragment="main_content">
+        <div class="page-content">
+            <div class="container-fluid">
+
+                <div th:if="${FLASH_SUCCESS_MSG != null}" class="alert alert-aquamarine alert-border-left alert-close alert-dismissible fade in" role="alert">
+                    <button aria-label="Close" class="close" data-dismiss="alert" type="button">
+                        <span aria-hidden="true">×</span>
+                    </button>
+                    <strong  th:text="${FLASH_SUCCESS_MSG}">Success!</strong>
+                </div>
+
+                <div th:if="${FLASH_ERROR_MSG != null}" class="alert alert-danger alert-border-left alert-close alert-dismissible fade in" role="alert">
+                    <button aria-label="Close" class="close" data-dismiss="alert" type="button">
+                        <span aria-hidden="true">×</span>
+                    </button>
+                    <strong  th:text="${FLASH_ERROR_MSG}">Error!</strong>
+                </div>
+
+                <div layout:fragment="content"></div>
+
+            </div>
+        </div>
+    </div>
+    <div th:include="layouts/fragments/foot_js"></div>
+
+    <div layout:fragment="footer_js_include">
+
+    </div>
+
+    </body>
+</html>

@@ -1,0 +1,5 @@
+body {
+    /*background-image: url("/img/slider-bg4.jpg");*/
+    background: url(/img/slider-bg4.jpg) no-repeat;
+    background-size: 100%;
+}

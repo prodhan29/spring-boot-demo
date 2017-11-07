@@ -1,0 +1,72 @@
+<!DOCTYPE html>
+<html xmlns:th="http://www.thymeleaf.org"
+      xmlns:layout="http://www.ultraq.net.nz/thymeleaf/layout"
+      xmlns="http://www.w3.org/1999/xhtml"
+      layout:decorator="layouts/base_layout">
+
+<div layout:fragment="content">
+
+    <section class="card">
+        <h4> Create Task</h4>
+    </section>
+
+    <section>
+        <div class="card-block">
+            <form th:object="${task}" th:action="@{/task/create}" action="#" method="post">
+
+                <div class="row">
+                    <div class="col-md-6">
+                        <fieldset class="form-group">
+                            <label class="form-label required-field">Name</label>
+                            <input th:field="*{name}"
+                                   required="required"
+                                   name="signin_v2[username]"
+                                   type="text"
+                                   class="form-control"
+                                   data-validation="[NOTEMPTY]">
+
+                            <label class="error-validation" th:if="${#fields.hasErrors('name')}" th:errors="*{name}">Error
+                                Message
+                            </label>
+                        </fieldset>
+
+                        <fieldset class="form-group">
+                            <label class="form-label required-field">Status</label>
+                            <input required="required"
+                                      th:field="*{status}"
+                                      class="form-control"
+                                      placeholder="Textarea">
+
+                            <label class="error-validation"
+                                   th:if="${#fields.hasErrors('status')}"
+                                   th:errors="*{status}">Error Message
+                            </label>
+                        </fieldset>
+
+                        <fieldset class="form-group">
+                            <label class="form-label required-field">Priority</label>
+                            <input required="required"
+
+                                   th:field="*{priority}"
+                                   class="form-control"
+                                   placeholder="Textarea">
+
+                            <label class="error-validation"
+                                   th:if="${#fields.hasErrors('priority')}"
+                                   th:errors="*{priority}">Error Message
+                            </label>
+                        </fieldset>
+
+                    </div>
+                </div><!--.row-->
+                <a class="btn btn-info" th:href="@{/}">
+                    Back
+                </a>&nbsp;&nbsp;
+                <button type="submit" class="btn">Submit</button>
+            </form>
+        </div>
+    </section>
+
+</div>
+
+</html>
