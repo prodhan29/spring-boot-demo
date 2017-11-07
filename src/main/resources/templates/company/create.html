@@ -1,0 +1,58 @@
+<!DOCTYPE html>
+<html xmlns:th="http://www.thymeleaf.org"
+      xmlns:layout="http://www.ultraq.net.nz/thymeleaf/layout"
+      xmlns="http://www.w3.org/1999/xhtml"
+      layout:decorator="layouts/base_layout">
+
+<div layout:fragment="content">
+
+    <section class="card">
+        <h4> Create Company</h4>
+    </section>
+
+    <section>
+        <div class="card-block">
+            <form th:object="${company}" th:action="@{/company/save}" action="#" method="post">
+
+                <div class="row">
+                    <div class="col-md-6">
+
+                        <fieldset class="form-group">
+                            <label class="form-label required-field">Name</label>
+                            <input th:field="*{name}"
+                                   required="required"
+                                   type="text"
+                                   class="form-control"
+                                   data-validation="[NOTEMPTY]">
+
+                            <label class="error-validation" th:if="${#fields.hasErrors('name')}" th:errors="*{name}">Error
+                                Message
+                            </label>
+                        </fieldset>
+
+                        <fieldset class="form-group">
+                            <label class="form-label required-field">Address</label>
+                            <input required="required"
+                                   th:field="*{address}"
+                                   class="form-control"
+                                   placeholder="Textarea">
+
+                            <label class="error-validation"
+                                   th:if="${#fields.hasErrors('address')}"
+                                   th:errors="*{address}">Error Message
+                            </label>
+                        </fieldset>
+
+                    </div>
+                </div><!--.row-->
+                <a class="btn btn-info" th:href="@{/}">
+                    Back
+                </a>&nbsp;&nbsp;
+                <button type="submit" class="btn">Submit</button>
+            </form>
+        </div>
+    </section>
+
+</div>
+
+</html>

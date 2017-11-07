@@ -6,8 +6,23 @@
 
 <div layout:fragment="content">
 
+    <section>
+        <a class="btn btn-success" th:href="@{/}">
+            Users
+        </a>
+
+        <a class="btn btn-success"  th:href="@{/task/create}">
+            Task
+        </a>
+
+        <a class="btn btn-success" th:href="@{/company/index}">
+            Company
+        </a>
+    </section>
+    </br>
+
     <section class="card">
-        <h2>All Users</h2>
+        <h2 style="text-align: center">All Users</h2>
     </section>
 
     <section>

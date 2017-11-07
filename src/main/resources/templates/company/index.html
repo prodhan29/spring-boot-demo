@@ -1,0 +1,39 @@
+<!DOCTYPE html>
+<html xmlns:th="http://www.thymeleaf.org"
+      xmlns:layout="http://www.ultraq.net.nz/thymeleaf/layout"
+      xmlns="http://www.w3.org/1999/xhtml"
+      layout:decorator="layouts/base_layout">
+
+<div layout:fragment="content">
+
+    <section class="card">
+        <a class="btn btn-success pull-right" th:href="@{/company/create}"> Create </a>
+        <h2 style="text-align: center">All Companies</h2>
+    </section>
+
+    <section>
+        <div class="card-block">
+            <table class="table">
+                <tr>
+                    <th>ID</th>
+                    <th>Name</th>
+                    <th>Address</th>
+                    <th></th>
+                </tr>
+                <tr th:each="company: ${allCompanies}">
+                    <td th:text="${company?.id}"></td>
+                    <td th:text="${company?.name}"></td>
+                    <td th:text="${company?.address}"></td>
+                    <td>
+                        <a class="btn btn-info" th:href="@{/company/}+ ${company?.id} +@{/info}">
+                            show
+                        </a>
+                    </td>
+                </tr>
+            </table>
+        </div>
+    </section>
+
+</div>
+
+</html>

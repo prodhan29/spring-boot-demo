@@ -20,6 +20,14 @@ public class Company extends BaseEntity {
     @OneToMany(fetch = FetchType.EAGER, mappedBy = "company")
     private List<User> employees;
 
+    public List<User> getEmployees() {
+        return employees;
+    }
+
+    public void setEmployees(List<User> employees) {
+        this.employees = employees;
+    }
+
     public String getName() {
         return name;
     }
