@@ -1,5 +1,8 @@
 package com.moto.spring_demo.domain;
 
+import org.hibernate.annotations.Fetch;
+import org.hibernate.annotations.FetchMode;
+
 import javax.persistence.*;
 import javax.validation.constraints.Size;
 import java.util.List;
@@ -15,7 +18,7 @@ public class User extends BaseEntity {
     @Column(unique = true)
     private String username;
 
-    @OneToMany
+    @OneToMany(cascade = CascadeType.ALL, orphanRemoval = true, fetch = FetchType.EAGER, mappedBy = "user")
     private List<Task>tasks ;
 
     @ManyToOne

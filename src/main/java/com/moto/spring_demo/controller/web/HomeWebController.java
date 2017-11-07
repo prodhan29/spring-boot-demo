@@ -1,12 +1,14 @@
 package com.moto.spring_demo.controller.web;
 
 import com.moto.spring_demo.domain.User;
+import com.moto.spring_demo.repository.TaskRepository;
 import com.moto.spring_demo.repository.UserRepository;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Controller;
 import org.springframework.ui.Model;
 import org.springframework.web.bind.annotation.*;
 
+import javax.transaction.Transactional;
 import java.util.List;
 
 /**
@@ -19,6 +21,9 @@ public class HomeWebController {
     @Autowired
     private UserRepository userRepository;
 
+    @Autowired
+    private TaskRepository taskRepository;
+
     @GetMapping("")
     public String index(Model model){
 
@@ -29,7 +34,11 @@ public class HomeWebController {
     @GetMapping("/user/{userId}/info")
     public String userInfo(@PathVariable("userId") Long userId, Model model){
 
-        model.addAttribute("user", userRepository.findOne(userId));
+        User user = userRepository.findOne(userId);
+        model.addAttribute("user", user);
+        model.addAttribute("tasks", taskRepository.findTasksByUser(user));
+        System.out.println("----------------------------------");
+        System.out.println(user.getTasks().size());
         return "user/info";
     }
 
@@ -44,8 +53,7 @@ public class HomeWebController {
     public String userUpdate(@ModelAttribute User user, Model model){
 
         userRepository.save(user);
-        model.addAttribute("allUsers", userRepository.findAll());
-        return "user/index";
+        return "redirect:/";
     }
 
     // @DeleteMapping can only be used in Api
@@ -53,7 +61,6 @@ public class HomeWebController {
     public String userDelete(@PathVariable("userId") Long Id, Model model) {
 
         userRepository.delete(Id);
-        model.addAttribute("allUsers", userRepository.findAll());
-        return "user/index";
+        return "redirect:/";
     }
 }
