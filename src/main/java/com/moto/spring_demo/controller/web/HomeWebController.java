@@ -4,6 +4,7 @@ import com.moto.spring_demo.domain.User;
 import com.moto.spring_demo.repository.TaskRepository;
 import com.moto.spring_demo.repository.UserRepository;
 import org.springframework.beans.factory.annotation.Autowired;
+import org.springframework.security.crypto.bcrypt.BCryptPasswordEncoder;
 import org.springframework.stereotype.Controller;
 import org.springframework.ui.Model;
 import org.springframework.web.bind.annotation.*;
@@ -24,10 +25,17 @@ public class HomeWebController {
     @Autowired
     private TaskRepository taskRepository;
 
+    @GetMapping("/login")
+    public String login() {
+
+        return "login";
+    }
+
     @GetMapping("")
     public String index(Model model){
 
         model.addAttribute("allUsers", userRepository.findAll());
+        model.addAttribute("pass", new BCryptPasswordEncoder().encode("nahid"));
         return "user/index";
     }
 
@@ -38,7 +46,7 @@ public class HomeWebController {
         model.addAttribute("user", user);
         model.addAttribute("tasks", taskRepository.findTasksByUser(user));
         System.out.println("----------------------------------");
-        System.out.println(user.getTasks().size());
+//        System.out.println(user.getTasks().size());
         return "user/info";
     }
 
