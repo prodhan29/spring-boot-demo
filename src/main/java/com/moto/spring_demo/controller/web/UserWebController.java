@@ -17,7 +17,7 @@ import java.util.List;
  */
 
 @Controller
-public class HomeWebController {
+public class UserWebController {
 
     @Autowired
     private UserRepository userRepository;
@@ -60,6 +60,8 @@ public class HomeWebController {
     @PostMapping("/user/update")
     public String userUpdate(@ModelAttribute User user, Model model){
 
+        String endcodedPassword = new BCryptPasswordEncoder().encode(user.getPassword());
+        user.setPassword(endcodedPassword);
         userRepository.save(user);
         return "redirect:/";
     }

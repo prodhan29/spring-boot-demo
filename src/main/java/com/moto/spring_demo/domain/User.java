@@ -24,7 +24,7 @@ public class User extends BaseEntity implements UserDetails{
     @Column(unique = true)
     private String username;
 
-    @Size(min= 6)
+    @Size(min= 3, message = "password is too short")
     @NotNull
     private String password;
 
@@ -76,7 +76,11 @@ public class User extends BaseEntity implements UserDetails{
 
     @Override
     public String getPassword() {
-        return null;
+        return this.password;
+    }
+
+    public void setPassword(String password){
+        this.password = password;
     }
 
     public String getUsername() {
