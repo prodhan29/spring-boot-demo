@@ -1,6 +1,7 @@
 package com.moto.spring_demo.controller.web;
 
 import com.moto.spring_demo.domain.User;
+import com.moto.spring_demo.domain.annotations.CurrentUser;
 import com.moto.spring_demo.repository.TaskRepository;
 import com.moto.spring_demo.repository.UserRepository;
 import org.springframework.beans.factory.annotation.Autowired;
@@ -32,10 +33,12 @@ public class UserWebController {
     }
 
     @GetMapping("")
-    public String index(Model model){
+    public String index(@CurrentUser User user, Model model){
 
         model.addAttribute("allUsers", userRepository.findAll());
         model.addAttribute("pass", new BCryptPasswordEncoder().encode("nahid"));
+        System.out.println("--------username------");
+        System.out.println(user.getUsername());
         return "user/index";
     }
 

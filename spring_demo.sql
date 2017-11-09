@@ -1,4 +1,5 @@
--- MySQL dump 10.13  Distrib 5.7.20, for osx10.12 (x86_64)
+Terminal close -- exit!
+trib 5.7.20, for osx10.12 (x86_64)
 --
 -- Host: localhost    Database: spring_demo
 -- ------------------------------------------------------
