@@ -35,7 +35,7 @@ public class UserWebController {
     public String index(Model model){
 
         model.addAttribute("allUsers", userRepository.findAll());
-        model.addAttribute("pass", new BCryptPasswordEncoder().encode("nahid"));
+        model.addAttribute("pass", new BCryptPasswordEncoder().encode("hridoy"));
         return "user/index";
     }
 

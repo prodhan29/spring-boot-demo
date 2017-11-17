@@ -24,6 +24,49 @@
 		<java.version>1.8</java.version>
 	</properties>
 
+	<profiles>
+		<profile>
+			<id>target.local</id>
+			<!-- Activated when -Dtarget=local is given as a parameter. -->
+			<activation>
+				<activeByDefault>true</activeByDefault>
+				<property>
+					<name>target</name>
+					<value>local</value>
+				</property>
+			</activation>
+			<properties>
+				<spring.profile>local</spring.profile>
+
+				<database.url>jdbc:mysql://localhost:3306/spring_demo?useSSL=false</database.url>
+				<database.username>root</database.username>
+				<database.password>12345678</database.password>
+			</properties>
+		</profile>
+
+		<profile>
+			<id>target.prod</id>
+			<!-- Activated when -Dtarget=local is given as a parameter. -->
+			<activation>
+				<!-- ____________________________________________________ -->
+				<!-- This property decide which profile will be activated -->
+				<!-- ```````````````````````````````````````````````````` -->
+				<!--<activeByDefault>true</activeByDefault>-->
+				<property>
+					<name>target</name>
+					<value>prod</value>
+				</property>
+			</activation>
+			<properties>
+				<spring.profile>prod</spring.profile>
+				<server.port>5000</server.port>
+				<database.url>jdbc:mysql://localhost:3306/spring_demo?useSSL=false</database.url>
+				<database.username>root</database.username>
+				<database.password>12345678</database.password>
+			</properties>
+		</profile>
+	</profiles>
+
 	<dependencies>
 		<dependency>
 			<groupId>org.springframework.boot</groupId>
