@@ -32,10 +32,12 @@ public class UserWebController {
     }
 
     @GetMapping("")
-    public String index(Model model){
+    public String index(@CurrentUser User user, Model model){
 
         model.addAttribute("allUsers", userRepository.findAll());
-        model.addAttribute("pass", new BCryptPasswordEncoder().encode("hridoy"));
+        model.addAttribute("pass", new BCryptPasswordEncoder().encode("nahid"));
+        System.out.println("--------username------");
+        System.out.println(user.getUsername());
         return "user/index";
     }
 
