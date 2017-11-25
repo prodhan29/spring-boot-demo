@@ -593,16 +593,16 @@ $(document).ready(function(){
 	if ($.browser.chrome) {
 		$('body').addClass('chrome-browser');
 	} else if ($.browser.msie) {
-		$('body').addClass('msie-browser');
-	} else if ($.browser.mozilla) {
-		$('body').addClass('mozilla-browser');
-	}
+        $('#show-hide-sidebar-toggle').on('click', function() {
+            if (!$('body').hasClass('sidebar-hidden')) {
+                $('body').addClass('sidebar-hidden');
+            } else {
+                $('body').removeClass('sidebar-hidden');
+            }
+        });
+        $('body').addClass('msie-browser');
+    } else if ($.browser.mozilla) {
+        $('body').addClass('mozilla-browser');
 
-	$('#show-hide-sidebar-toggle').on('click', function() {
-		if (!$('body').hasClass('sidebar-hidden')) {
-			$('body').addClass('sidebar-hidden');
-		} else {
-			$('body').removeClass('sidebar-hidden');
-		}
-	});
+	}
 });
