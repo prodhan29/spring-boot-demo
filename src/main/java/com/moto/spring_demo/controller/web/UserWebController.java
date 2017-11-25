@@ -32,6 +32,12 @@ public class UserWebController {
         return "login";
     }
 
+    @GetMapping("/chat")
+    public String chat() {
+
+        return "chat/index";
+    }
+
     @GetMapping("")
     public String index(@CurrentUser User user, Model model){
 
